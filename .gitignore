@@ -1,0 +1,7 @@
+.rvmrc
+.*.un~
+.*.swp
+.*.swo
+.DS_Store
+.sass-cache
+.jhw-cache
