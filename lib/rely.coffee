@@ -1,6 +1,6 @@
 window.Rely = class RelyonMe
   constructor: ->
-    @rely_script = $.find('script[src="/js/relyr.js"]')
+    @rely_script = $.find('script[src*="relyr.js"]')
 
   loadDependencies: (dependencies)->
     for script in dependencies

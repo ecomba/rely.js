@@ -7,7 +7,7 @@ describe 'rely', ->
     }
     @existingEngine = jQuery.find
     jQuery.find = (selector)->
-      if selector == 'script[src="/js/relyr.js"]'
+      if selector == 'script[src*="relyr.js"]'
         return obj
       return @existingEngine.find.apply(existingEngine, arguments)
     @ajaxSpy = sinon.spy($, 'ajax')
