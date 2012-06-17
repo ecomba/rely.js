@@ -2,6 +2,10 @@ window.Rely = class RelyonMe
   constructor: ->
     @rely_script = $.find('script[src*="rely.js"]')
 
+  path: ->
+    src_attribute = @rely_script.attr('src')
+    src_attribute.substring(0, src_attribute.search('rely.js'))
+
   loadDependencies: (dependencies)->
     for script in dependencies
       if script.name
@@ -19,7 +23,7 @@ window.Rely = class RelyonMe
     )
 
   loadApp: (app, options)->
-    @loadScript "/js/#{app}.js", false
+    @loadScript "#{@path()}#{app}.js", false
     app = new (eval(app))(options)
     @_loadAppDependencies(app)
     app

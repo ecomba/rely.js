@@ -1,7 +1,8 @@
 describe 'rely', ->
   beforeEach ->
     obj = {
-      src: '/js/rely.js'
+      attr: (value)->
+        return '/js/rely.js' if value == 'src'
       data: (value)->
         return 'testapp' if value == 'app'
         {} if value == 'options'
@@ -35,6 +36,9 @@ describe 'rely', ->
     $.mockjaxClear()
     @ajaxSpy.restore()
     jQuery.find = @existingEngine
+
+  it 'returns the extracted path for the local scripts', ->
+    expect(@rely.path()).toEqual '/js/'
 
   it 'loads one dependency', ->
     @rely.loadDependencies ['testapp.js']
