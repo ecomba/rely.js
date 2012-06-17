@@ -1,13 +1,14 @@
 describe 'rely', ->
   beforeEach ->
     obj = {
+      src: '/js/rely.js'
       data: (value)->
         return 'testapp' if value == 'app'
         {} if value == 'options'
     }
     @existingEngine = jQuery.find
     jQuery.find = (selector)->
-      if selector == 'script[src*="relyr.js"]'
+      if selector == 'script[src*="rely.js"]'
         return obj
       return @existingEngine.find.apply(existingEngine, arguments)
     @ajaxSpy = sinon.spy($, 'ajax')
