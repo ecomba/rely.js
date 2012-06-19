@@ -9,4 +9,10 @@ Jasmine::Headless::Task.new(:coffee) do |spec|
   spec.jasmine_config = 'spec/support/jasmine.yml'
 end
 
+task release: :coffee do
+  if system 'coffee -c -j rely-min lib/rely.coffee'
+    system 'uglifyjs -ns --overwrite rely-min.js'
+  end
+end
+
 task default: :coffee

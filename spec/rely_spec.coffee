@@ -19,7 +19,8 @@ describe 'rely', ->
         """
         (function() {
           window.testapp = TestApp = (function(_super) {
-            function TestApp(options) {
+            function TestApp(options, callback) {
+              callback.loadDependencies(this.dependencies);
             }
             TestApp.prototype.hello = function() {
               return 'hi there';

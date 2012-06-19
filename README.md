@@ -38,6 +38,39 @@ page is loaded.
 <script src='/js/rely.js' data-app='testapp' data-options='{greeting: 'OHAI rely.js!'}'/>
 ```
 
+### Structure of your app
+The application that rely.js is going to load has to comply with the 
+following contract:
+* it has to be attached to the window object.
+* it's name has to be lowercased and the same as the *data-app* parameter.
+* it has to accept two parameters in the constructor, the options and
+  a callback.
+* it has to call loadDependencies on the callback passing an array or map of
+  dependencies.
+
+Let's look at an example:
+```javascript
+(function() {
+  window.testapp = TestApp = (function(_super) {
+    function TestApp(options, callback) {
+      callback.loadDependencies(this.dependencies);
+      // anything to initialize your app flow after this...
+    }
+    TestApp.prototype.hello = function() {
+      return 'hi there';
+    };
+    TestApp.prototype.dependencies = ['a.js', 'b.js'];
+    return TestApp;
+  })();
+}).call(this);
+```
+
+### Recommendation
+To avoid making multiple calls to your server (specially if you have a lot
+of javascript code) it is recommended to use a minifying library and compile 
+all your code into one (uglyfied) javascript file using
+[UglifyJS](https://github.com/mishoo/UglifyJS) for example.
+
 [Enrique Comba Riepenhausen](http://ecomba.org)
 
 TBC

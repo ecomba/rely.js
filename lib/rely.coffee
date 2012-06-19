@@ -24,12 +24,7 @@ window.Rely = class RelyonMe
 
   loadApp: (app, options)->
     @loadScript "#{@path()}#{app}.js", false
-    app = new (eval(app))(options)
-    @_loadAppDependencies(app)
-    app
-
-  _loadAppDependencies: (app)->
-    @loadDependencies(app.dependencies) if app.dependencies
+    new (eval(app))(options, @)
 
   load: ->
     @loadApp(@rely_script.data('app'), @rely_script.data('options'))
